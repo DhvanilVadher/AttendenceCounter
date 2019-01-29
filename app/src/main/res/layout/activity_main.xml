@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#93fff2e8"
+    android:layout_rowSpan="2"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Attendence"
+        android:textColor="#090dff"
+        android:textSize="50sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:font="@font/pacifico"
+        android:text=""
+        android:textColor="#ff0000"
+        android:layout_gravity="center"
+        android:textSize="76sp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:text="Enter Today's Attendence"
+        android:onClick="Enterattendence"
+        android:layout_weight="1"
+        android:background="@drawable/roundedbuttonclicked"
+        />
+    <Button
+        android:layout_margin="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#123554"
+        android:fontFamily="sans-serif"
+        android:text="Show attendence till Today"
+        android:onClick="showAttendence"
+        android:layout_weight="1"
+        android:background="@drawable/roundedbuttonclicked"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#123554"
+        android:fontFamily="sans-serif"
+        android:text="Enter Time Table ...."
+        android:onClick="EnterTimeTable"
+        android:background="@drawable/roundedbuttonclicked"
+        android:layout_weight="1"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About US"
+        android:layout_weight="1"
+        android:layout_margin="10sp"
+        android:onClick="about"
+        android:layout_gravity="center"
+        android:background="@drawable/circle"/>
+</GridLayout>
