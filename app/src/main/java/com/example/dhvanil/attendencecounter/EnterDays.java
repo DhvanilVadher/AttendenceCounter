@@ -1,37 +1,16 @@
 package com.example.dhvanil.attendencecounter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 public class EnterDays extends AppCompatActivity {
 
@@ -59,10 +38,16 @@ public class EnterDays extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("FRIDAY"));
         tabLayout.addTab(tabLayout.newTab().setText("SATURDAY"));
         tabLayout.setupWithViewPager(pager);
+
       }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {   getMenuInflater().inflate( R.menu.menu_main,menu);
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

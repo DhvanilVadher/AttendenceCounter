@@ -1,24 +1,20 @@
 package com.example.dhvanil.attendencecounter;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Toast;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EnterAttendence extends AppCompatActivity {
-
-
     Toolbar toolbar;
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -39,5 +35,19 @@ public class EnterAttendence extends AppCompatActivity {
     }
 
     public void SubmitData( View view ) {
+    }
+
+    public void Show( View view ) {
+
+        DataBaseHelper hp = new DataBaseHelper( EnterAttendence.this,"Name");
+        Cursor cursor = hp.GetData();
+        StringBuffer buffer = new StringBuffer(  );
+        int count=0;
+        while (cursor.moveToNext())
+        {
+            buffer.append(cursor.getString(1)+cursor.getString( 2) +cursor.getString( 3 )+cursor.getString( 4 )+cursor.getString( 5 ));
+            count++;
+        }
+            Log.v( "esd","abcdef"+buffer.toString()+count);
     }
 }

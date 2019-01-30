@@ -11,24 +11,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
     }
-
     public void about( View view ) {
     }
-
     public void showAttendence( View view ) {
 
     }
-
     public void Enterattendence( View view ) {
         Intent intent = new Intent( MainActivity.this,EnterAttendence.class);
         startActivity(intent);
     }
-
     public void EnterTimeTable( View view ) {
         Intent intent = new Intent( MainActivity.this,EnterSub.class );
         startActivity(intent);
-    }
-
-    public void SubmitData( View view ) {
     }
 }
