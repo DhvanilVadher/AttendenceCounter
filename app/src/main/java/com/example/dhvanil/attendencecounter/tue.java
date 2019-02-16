@@ -1,7 +1,5 @@
 package com.example.dhvanil.attendencecounter;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,13 +12,16 @@ import android.widget.Toast;
 import android.widget.Button;
 import java.util.ArrayList;
 
+import static com.example.dhvanil.attendencecounter.ApplicationClass.monfilled;
+import static com.example.dhvanil.attendencecounter.ApplicationClass.tuesfilled;
+
 public class tue extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    public tue() {
-    }
+    public tue()
+    {}
     public static mon newInstance( String param1, String param2 ) {
         mon fragment = new mon();
         Bundle args = new Bundle();
@@ -38,7 +39,6 @@ public class tue extends Fragment {
             mParam2 = getArguments().getString( ARG_PARAM2 );
         }
     }
-
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState ) {
@@ -52,15 +52,15 @@ public class tue extends Fragment {
         final Spinner spinner6 = v.findViewById( R.id.Spinner6 );
         ArrayList a= new ArrayList<String>(  );
         TinyDB tinyDB =new TinyDB( getContext());
-        a=tinyDB.getListString( "A");
+        a=tinyDB.getListString("A");
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,a);
-        spinner1.setAdapter( adapter );
-        spinner2.setAdapter( adapter );
-        spinner3.setAdapter( adapter );
-        spinner4.setAdapter( adapter );
-        spinner5.setAdapter( adapter );
-        spinner6.setAdapter( adapter );
-        Button btn= v.findViewById( R.id.EnterIntoData );
+        spinner1.setAdapter(adapter);
+        spinner2.setAdapter(adapter);
+        spinner3.setAdapter(adapter);
+        spinner4.setAdapter(adapter);
+        spinner5.setAdapter(adapter);
+        spinner6.setAdapter(adapter);
+        Button btn= v.findViewById(R.id.EnterIntoData);
         btn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
@@ -72,16 +72,18 @@ public class tue extends Fragment {
                 String a6 = spinner6.getSelectedItem().toString();
                 Log.v("TAG","aaaaaaaaa"+a1+a2+a3+a4+a5+a6);
                 DataBaseHelper hp = new DataBaseHelper( getContext(),"MyName" );
-
-                if(hp.insert(a1,a2,a3,a4,a5,a6)==true){
+                if(hp.insert(a1,a2,a3,a4,a5,a6)==true)
+                {
                     Toast.makeText( getContext(),"Yeah",Toast.LENGTH_SHORT ).show();
                 }
                 else
                 {
                     Toast.makeText( getContext(),"NOOOOOO!!!",Toast.LENGTH_SHORT ).show();
                 }
+
+               tuesfilled=true;
             }
-        } );
+        });
         return v;
     }
 

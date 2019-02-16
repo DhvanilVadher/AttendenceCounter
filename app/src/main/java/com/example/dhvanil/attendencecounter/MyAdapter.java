@@ -24,10 +24,12 @@ public class MyAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fregment1.size();
     }
+
     public void addFregment(Fragment fragment,String a){
         fregment1.add( fragment );
         titles.add(a);
     }
+
 
     @Nullable
     @Override

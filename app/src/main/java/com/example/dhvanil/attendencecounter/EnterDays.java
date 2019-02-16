@@ -14,13 +14,12 @@ import java.util.ArrayList;
 
 public class EnterDays extends AppCompatActivity {
 
-    ArrayList<String> a ;
+    ArrayList<String> a;
     private String m_Text = "";
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
+    protected void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_enter_days );
-
         final ViewPager pager = (ViewPager)findViewById(R.id.ViewPager);
         MyAdapter adapter1 = new MyAdapter( getSupportFragmentManager());
         adapter1.addFregment(new mon(),"MON");
@@ -29,7 +28,7 @@ public class EnterDays extends AppCompatActivity {
         adapter1.addFregment(new thurs(),"THU");
         adapter1.addFregment(new fri(),"FRI");
         adapter1.addFregment(new satur(),"SAT");
-        pager.setAdapter(adapter1 );
+        pager.setAdapter(adapter1);
         final TabLayout tabLayout = findViewById( R.id.tablayout );
         tabLayout.addTab(tabLayout.newTab().setText("MONDAY"));
         tabLayout.addTab(tabLayout.newTab().setText("TUESDAY"));
@@ -38,7 +37,6 @@ public class EnterDays extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("FRIDAY"));
         tabLayout.addTab(tabLayout.newTab().setText("SATURDAY"));
         tabLayout.setupWithViewPager(pager);
-
       }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

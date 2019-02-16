@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.dhvanil.attendencecounter.ApplicationClass.hp;
+import static com.example.dhvanil.attendencecounter.ApplicationClass.monfilled;
+
 
 public class mon extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -44,7 +47,7 @@ public class mon extends Fragment {
     }
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState ) {
+                              Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_mon,container,false);
         final Spinner spinner1 = v.findViewById(R.id.Spinner1);
         final Spinner spinner2 = v.findViewById(R.id.Spinner2);
@@ -54,7 +57,8 @@ public class mon extends Fragment {
         final Spinner spinner6 = v.findViewById(R.id.Spinner6);
         ArrayList a= new ArrayList<String>();
         TinyDB tinyDB =new TinyDB( getContext());
-        a=tinyDB.getListString( "A");
+        a=tinyDB.getListString("A");
+        a.add( 0,"--------none-------" );
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,a);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
@@ -73,7 +77,7 @@ public class mon extends Fragment {
                 String a5 = spinner5.getSelectedItem().toString();
                 String a6 = spinner6.getSelectedItem().toString();
                 Log.v("TAG","aaaaaaaaa"+a1+a2+a3+a4+a5+a6);
-                DataBaseHelper hp = new DataBaseHelper( getContext(),"MyName" );
+                hp.deleteAll();
                 if(hp.insert(a1,a2,a3,a4,a5,a6)==true){
                     Toast.makeText( getContext(),"Yeah",Toast.LENGTH_SHORT ).show();
                     }
@@ -81,6 +85,7 @@ public class mon extends Fragment {
                 {
                     Toast.makeText( getContext(),"NOOOOOO!!!",Toast.LENGTH_SHORT ).show();
                 }
+                monfilled=true;
             }
         } );
         return v;

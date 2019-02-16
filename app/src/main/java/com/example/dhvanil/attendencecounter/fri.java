@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.dhvanil.attendencecounter.ApplicationClass.frifilled;
+import static com.example.dhvanil.attendencecounter.ApplicationClass.hp;
+
 public class fri extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -72,7 +75,6 @@ public class fri extends Fragment {
                 String a5 = spinner5.getSelectedItem().toString();
                 String a6 = spinner6.getSelectedItem().toString();
                 Log.v("TAG","aaaaaaaaa"+a1+a2+a3+a4+a5+a6);
-                DataBaseHelper hp = new DataBaseHelper( getContext(),"MyName" );
 
                 if(hp.insert(a1,a2,a3,a4,a5,a6)==true){
                     Toast.makeText( getContext(),"Yeah",Toast.LENGTH_SHORT ).show();
@@ -81,7 +83,7 @@ public class fri extends Fragment {
                 {
                     Toast.makeText( getContext(),"NOOOOOO!!!",Toast.LENGTH_SHORT ).show();
                 }
-
+                frifilled = true;
             }
         } );
         return v;
