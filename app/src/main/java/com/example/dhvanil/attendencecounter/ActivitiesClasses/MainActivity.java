@@ -18,9 +18,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Startdate;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Todaydate;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.TotalAttendence;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hp;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hpd;
 

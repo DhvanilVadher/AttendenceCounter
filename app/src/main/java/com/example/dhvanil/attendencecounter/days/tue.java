@@ -57,6 +57,7 @@ public class tue extends Fragment {
         ArrayList a= new ArrayList<String>(  );
         TinyDB tinyDB =new TinyDB( getContext());
         a=tinyDB.getListString("A");
+        a.add( 0,"--------none-------" );
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,a);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
