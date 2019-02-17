@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,17 +25,18 @@ public class attendenceManager extends AppCompatActivity {
 
     ListView listView ;
     String Date,Day;
-    ArrayList<String>Lectures;
+    ArrayList<String>Lectures= new ArrayList<>();
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_attendence_manager );
         listView = findViewById( R.id.ListView);
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         Date = intent.getStringExtra("date");
         Day = intent.getStringExtra("Day");
         getLecturesList();
-
+        CustomAdapter adapter = new CustomAdapter();
+        listView.setAdapter(adapter);
     }
 
     private void getLecturesList() {
@@ -45,7 +47,9 @@ public class attendenceManager extends AppCompatActivity {
         hashMap.put("THURSDAY",4);
         hashMap.put("FRIDAY",5);
         hashMap.put("SATURDAY",6);
-        Cursor cursor = hp.select(hashMap.get(Day));
+        if(Day!=null)
+        {
+            Cursor cursor = hp.select(hashMap.get(Day));
         if(cursor.moveToFirst()){
             while (!cursor.isAfterLast())
             {
@@ -57,6 +61,10 @@ public class attendenceManager extends AppCompatActivity {
                     }
                 }
             }
+        }
+        }
+        else{
+            Log.v("adas","noooooo why");
         }
     }
 
