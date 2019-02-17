@@ -1,11 +1,8 @@
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.days;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +12,13 @@ import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.dhvanil.attendencecounter.R;
+import com.example.dhvanil.attendencecounter.DataBaseClass.TinyDB;
+
 import java.util.ArrayList;
 
-import static com.example.dhvanil.attendencecounter.ApplicationClass.hp;
-import static com.example.dhvanil.attendencecounter.ApplicationClass.monfilled;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hp;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.monfilled;
 
 
 public class mon extends Fragment {
@@ -48,7 +48,7 @@ public class mon extends Fragment {
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_mon,container,false);
+        View v =inflater.inflate( R.layout.fragment_mon,container,false);
         final Spinner spinner1 = v.findViewById(R.id.Spinner1);
         final Spinner spinner2 = v.findViewById(R.id.Spinner2);
         final Spinner spinner3 = v.findViewById(R.id.Spinner3);

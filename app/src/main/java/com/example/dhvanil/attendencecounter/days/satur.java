@@ -1,7 +1,5 @@
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.days;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,9 +11,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dhvanil.attendencecounter.R;
+import com.example.dhvanil.attendencecounter.DataBaseClass.TinyDB;
+
 import java.util.ArrayList;
 
-import static com.example.dhvanil.attendencecounter.ApplicationClass.hp;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hp;
 
 
 public class satur extends Fragment {

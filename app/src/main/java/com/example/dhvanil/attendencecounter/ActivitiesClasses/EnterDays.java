@@ -1,13 +1,19 @@
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.ActivitiesClasses;
 
-import android.database.Cursor;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
+
+import com.example.dhvanil.attendencecounter.Adapters.MyAdapter;
+import com.example.dhvanil.attendencecounter.R;
+import com.example.dhvanil.attendencecounter.days.fri;
+import com.example.dhvanil.attendencecounter.days.mon;
+import com.example.dhvanil.attendencecounter.days.satur;
+import com.example.dhvanil.attendencecounter.days.thurs;
+import com.example.dhvanil.attendencecounter.days.tue;
+import com.example.dhvanil.attendencecounter.days.wed;
 
 import java.util.ArrayList;
 

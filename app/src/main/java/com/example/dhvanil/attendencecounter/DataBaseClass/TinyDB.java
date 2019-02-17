@@ -19,7 +19,7 @@
  *  and unicode 2017 that are used for separating the items in a list.
  */
 
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.DataBaseClass;
 
 import java.io.File;
 import java.io.FileOutputStream;

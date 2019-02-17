@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EnterAttendence">
+    tools:context=".ActivitiesClasses.EnterAttendence">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar1"
@@ -17,13 +17,14 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="659dp"
+        android:layout_width="401dp"
+        android:layout_height="567dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar1" />
-
+        app:layout_constraintTop_toBottomOf="@+id/toolbar1"
+        ></android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.Adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,8 +29,6 @@ public class MyAdapter extends FragmentPagerAdapter {
         fregment1.add( fragment );
         titles.add(a);
     }
-
-
     @Nullable
     @Override
     public CharSequence getPageTitle( int position ) {

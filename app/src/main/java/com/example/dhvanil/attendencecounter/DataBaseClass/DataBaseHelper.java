@@ -1,12 +1,10 @@
-package com.example.dhvanil.attendencecounter;
+package com.example.dhvanil.attendencecounter.DataBaseClass;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import static com.example.dhvanil.attendencecounter.ApplicationClass.hp;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper( Context context,String name) {
@@ -25,10 +23,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS TIMETABLE");
         onCreate(db);
     }
-
+    public Cursor select(int id)
+    {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery( "SELECT LEC1,LEC2,LEC3,LEC4,LEC5,LEC6 FROM TIMETABLE WHERE ID="+id,null);
+        return cursor;
+    }
     public boolean insert(String L1,String L2,String L3,String L4,String L5,String L6)
     {
-        hp.deleteAll();
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("LEC1",L1);

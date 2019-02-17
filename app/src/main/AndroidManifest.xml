@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ActivitiesClasses.attendenceManager"></activity>
+        <activity android:name=".ActivitiesClasses.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EnterAttendence" />
-        <activity android:name=".EnterSub" />
-        <activity android:name=".EnterDays"></activity>
+        <activity android:name=".ActivitiesClasses.EnterAttendence" />
+        <activity android:name=".ActivitiesClasses.EnterSub" />
+        <activity android:name=".ActivitiesClasses.EnterDays" />
     </application>
 
 </manifest>
