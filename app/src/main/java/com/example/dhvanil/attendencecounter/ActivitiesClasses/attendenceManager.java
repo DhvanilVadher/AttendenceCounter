@@ -1,5 +1,6 @@
 package com.example.dhvanil.attendencecounter.ActivitiesClasses;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class attendenceManager extends AppCompatActivity {
         Date = intent.getStringExtra("date");
         Day = intent.getStringExtra("Day");
         getLecturesList();
-        CustomAdapter adapter = new CustomAdapter();
+        CustomAdapter adapter = new CustomAdapter(Lectures,this);
         listView.setAdapter(adapter);
     }
 
@@ -50,18 +51,17 @@ public class attendenceManager extends AppCompatActivity {
         if(Day!=null)
         {
             Cursor cursor = hp.select(hashMap.get(Day));
-        if(cursor.moveToFirst()){
+            if(cursor.moveToFirst()){
             while (!cursor.isAfterLast())
             {
-                for(int i=1;i<=6;i++)
+                for(int i=0;i<=5;i++)
                 {
                     String a=cursor.getString(i);
-                    if(a!="--------none-------"){
-                        Lectures.add(a);
-                    }
+                    Lectures.add(a);
                 }
+               cursor.moveToNext();
+             }
             }
-        }
         }
         else{
             Log.v("adas","noooooo why");
@@ -69,8 +69,31 @@ public class attendenceManager extends AppCompatActivity {
     }
 
     class CustomAdapter extends BaseAdapter{
-            ArrayList<List> arrayList = new ArrayList<>(  );
-            @Override
+            ArrayList<String> arrayList;
+            Context context;
+
+        public CustomAdapter( ArrayList<String> arrayList, Context context ) {
+            this.arrayList = arrayList;
+            this.context = context;
+        }
+
+        public ArrayList<String> getArrayList() {
+            return arrayList;
+        }
+
+        public void setArrayList( ArrayList<String> arrayList ) {
+            this.arrayList = arrayList;
+        }
+
+        public Context getContext() {
+            return context;
+        }
+
+        public void setContext( Context context ) {
+            this.context = context;
+        }
+
+        @Override
             public int getCount() {
                 return arrayList.size();
             }
@@ -89,7 +112,7 @@ public class attendenceManager extends AppCompatActivity {
                 RadioButton attended = convertView.findViewById( R.id.present);
                 RadioButton abscent = convertView.findViewById( R.id.abscent);
                 RadioButton Holiday = convertView.findViewById( R.id.Holiday);
-                textView.setText( arrayList.get(position).getDay());
+                textView.setText(arrayList.get(position));
                 //                ImageButton imageButton = convertView.findViewById( R.id.imagedelete );
 //                TextView textView  = convertView.findViewById( R.id.Subjecttext );
 //                textView.setText( arrayList.get( position ));

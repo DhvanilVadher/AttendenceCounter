@@ -3,4 +3,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_any_one_subject_n_or_select_none">Enter any one Subject  or Select none.</string>
 </resources>
