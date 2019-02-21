@@ -1,30 +1,34 @@
 package com.example.dhvanil.attendencecounter.ActivitiesClasses;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.LoginFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dhvanil.attendencecounter.DataBaseClass.DataBaseHelper;
 import com.example.dhvanil.attendencecounter.DataBaseClass.DataBaseHelperForDate;
+import com.example.dhvanil.attendencecounter.DataBaseClass.attendencePersentage;
 import com.example.dhvanil.attendencecounter.R;
 import com.example.dhvanil.attendencecounter.DataBaseClass.TinyDB;
+import com.example.dhvanil.attendencecounter.adaptersClasses.List;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Startdate;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Todaydate;
-import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.TotalAttendence;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hp;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hpd;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.APT;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -68,12 +72,40 @@ public class MainActivity extends AppCompatActivity
     }
     private void initialization(){
         TinyDB tinyDB = new TinyDB( this );
-        startingDate= tinyDB.getString( "StartingDate");
+        startingDate= tinyDB.getString("StartingDate");
+        APT= new attendencePersentage(this);
     }
-    public void about( View view ) {
+    public void about(View view){
     }
     public void showAttendence( View view ) {
-
+        Cursor cursor = hp.GetData();
+        Log.v("what","Data for First");
+        if(cursor.moveToFirst()){
+            while (!cursor.isAfterLast())
+            {
+                Log.v("what",cursor.getString(1) + " " +cursor.getString( 2)+" "+ cursor.getString( 3 )+" "+cursor.getString( 4)+" "+cursor.getString( 5 )+cursor.getString( 6 ));
+                cursor.moveToNext();
+            }
+        }
+        cursor = hpd.GetData();
+        Log.v("what","Data for second");
+        if(cursor.moveToFirst()){
+            while (!cursor.isAfterLast())
+            {
+                Log.v("what",cursor.getString(0));
+                cursor.moveToNext();
+            }
+        }
+        cursor=APT.GetData();
+        Log.v("what","Date for third");
+        cursor.moveToFirst();
+        if(cursor.moveToFirst()){
+            while (!cursor.isAfterLast())
+            {
+                Log.v("what",cursor.getString(0)+cursor.getInt(1) + " " +cursor.getInt(2));
+                cursor.moveToNext();
+            }
+        }
     }
     public void Enterattendence( View view ) {
         Intent intent = new Intent( MainActivity.this, EnterAttendence.class);

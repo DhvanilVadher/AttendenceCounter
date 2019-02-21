@@ -19,10 +19,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.dhvanil.attendencecounter.DataBaseClass.attendencePersentage;
 import com.example.dhvanil.attendencecounter.R;
 import com.example.dhvanil.attendencecounter.DataBaseClass.TinyDB;
 
 import java.util.ArrayList;
+
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.APT;
 
 public class EnterSub extends AppCompatActivity {
     ArrayList<String> a;
@@ -85,7 +88,10 @@ public class EnterSub extends AppCompatActivity {
     }
     public void gotoEnterdays( View view ) {
         Intent intent = new Intent( EnterSub.this, EnterDays.class );
-        startActivity( intent );
+        startActivity(intent);
+        APT.deleteALL();
+        for(int i=0;i<a.size();i++)
+            APT.insert( a.get(i),0,0);
         finish();
     }
     public void SubmitData( View view ) {

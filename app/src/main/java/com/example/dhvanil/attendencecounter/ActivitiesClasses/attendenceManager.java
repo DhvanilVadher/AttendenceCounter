@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -16,8 +17,9 @@ import com.example.dhvanil.attendencecounter.R;
 import com.example.dhvanil.attendencecounter.adaptersClasses.List;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.APT;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hp;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hpd;
 
 public class attendenceManager extends AppCompatActivity {
     ListView listView ;
@@ -25,14 +27,19 @@ public class attendenceManager extends AppCompatActivity {
     ArrayList<String>Lectures= new ArrayList<>();
     ArrayList<List>Lectures1= new ArrayList<>(  );
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_attendence_manager );
-        listView = findViewById( R.id.ListView);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_attendence_manager);
+        listView=findViewById(R.id.ListView);
         Intent intent = getIntent();
         Date = intent.getStringExtra("date");
         Day = intent.getStringExtra("Day");
         getLecturesList();
+        Cursor cursor = hpd.Select(Date);
+        if(cursor.moveToFirst()) {
+            ImageView imageView = findViewById( R.id.image );
+            imageView.setImageResource( R.drawable.varified );
+        }
         CustomAdapter adapter = new CustomAdapter(Lectures1,this);
         listView.setAdapter(adapter);
     }
@@ -71,8 +78,52 @@ public class attendenceManager extends AppCompatActivity {
 
     public void EnterIntoData(View view)
     {
-        for(int i=0;i<Lectures1.size();i++){
+       int Total = 0;
+       int Attended = 0;
+       Cursor c= hpd.Select( Date);
+       if(hpd.insert(Date))
+        {
+           Log.v("yeah","Yeah");
         }
+        else
+        {
+            Log.v("NOOOO","Noooo");
+        }
+       for (List i :Lectures1){
+           //Sorry to Confuse but inplace of the day there should be Subject name
+           if(APT!=null) {
+               Cursor cursor = APT.Select(i.getDay());
+               if(cursor.moveToFirst()){
+                   while (!cursor.isAfterLast())
+                   {
+                       Total = cursor.getInt( 1 );
+                       Attended = cursor.getInt( 2 );
+                       cursor.moveToNext();
+                   }
+               }
+           }
+           else {
+               Log.v("Noo","nooo");
+           }
+           if(i.isAttended()==true) {
+               Total++;
+               Attended++;
+           }
+           else if(i.isHoliday()==true){
+               //Nothing
+           }
+           else {
+               Total++;
+           }
+           Log.v("total",Total+ "/ "+Attended);
+           if(APT!=null){
+               APT.replace( i.getDay(),Total,Attended);
+               Log.v("yeah","yeah");
+           }
+           else
+           Log.v("Not included","not Included");
+       }
+
     }
     class CustomAdapter extends BaseAdapter{
             ArrayList<List> arrayList;
@@ -114,8 +165,8 @@ public class attendenceManager extends AppCompatActivity {
                 final RadioButton Holiday = convertView.findViewById( R.id.Holiday);
                 textView.setText(arrayList.get(position).getDay());
                 attended.setChecked(arrayList.get(position).isAttended());
-                abscent.setChecked(arrayList.get(position).isAttended());
-                Holiday.setChecked( arrayList.get(position).isAttended());
+                abscent.setChecked(arrayList.get(position).isAbsecent());
+                Holiday.setChecked( arrayList.get(position).isHoliday());
                 attended.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick( View v ) {
@@ -125,7 +176,7 @@ public class attendenceManager extends AppCompatActivity {
                         abscent.setChecked(false);
                         Holiday.setChecked(false);
                     }
-                } );
+                });
                 abscent.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick( View v ) {
@@ -135,7 +186,7 @@ public class attendenceManager extends AppCompatActivity {
                         attended.setChecked(false);
                         Holiday.setChecked(false);
                     }
-                } );
+                });
                 Holiday.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick( View v ) {
@@ -145,10 +196,10 @@ public class attendenceManager extends AppCompatActivity {
                         abscent.setChecked(false);
                         attended.setChecked(false);
                     }
-                } );
+                });
 //                                ImageButton imageButton = convertView.findViewById( R.id.imagedelete );
 //                TextView textView  = convertView.findViewById( R.id.Subjecttext );
-//                textView.setText( arrayList.get( position ));
+//                textView.setText( arrayListyList.get( position ));
                 return convertView;
             }
         }

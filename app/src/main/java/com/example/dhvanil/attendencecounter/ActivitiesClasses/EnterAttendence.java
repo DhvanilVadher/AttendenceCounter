@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Startdate;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Todaydate;
+import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.hpd;
 
 public class EnterAttendence extends AppCompatActivity {
     Toolbar toolbar;
@@ -48,14 +49,15 @@ public class EnterAttendence extends AppCompatActivity {
         Startdate= LocalDate.parse(starting,formatter);
         Todaydate=LocalDate.now();
         Todaydate.plusDays(1);
-        for(LocalDate date = Startdate;date.isBefore(Todaydate.plusDays(1));date= date.plusDays( 1 )){
+        for(LocalDate date = Startdate;date.isBefore(Todaydate.plusDays(1));date= date.plusDays(1)){
             String a= date.format(formatter);
             String b= String.valueOf(date.getDayOfWeek());
             DataClass dataClass = new DataClass(a,b);
             dataClasses.add(dataClass);
+            hpd.Update(a,false);
         }
         DateAdapter dateAdapter = new DateAdapter(this,dataClasses);
-        recyclerView.setAdapter( dateAdapter);
+        recyclerView.setAdapter(dateAdapter);
 
     }
 

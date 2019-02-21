@@ -11,27 +11,21 @@ public class DataBaseHelperForDate extends SQLiteOpenHelper
     }
     @Override
     public void onCreate( SQLiteDatabase db ) {
-        db.execSQL("CREATE TABLE DATESHEET(DATE1 DATE PRIMARY KEY,VARIFIED BOOLEAN)");
+        db.execSQL("CREATE TABLE DATESHEET(DATE1 TEXT)");
     }
     @Override
     public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
         db.execSQL( "DROP TABLE IF EXISTS DATESHEET");
     }
-    public boolean insert(String DATE,boolean Varified)
+    public boolean insert(String DATE)
     {
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("DATE1",DATE);
-        contentValues.put( "VARIFIED",Varified);
         long indicator = db.insert("DATESHEET",null,contentValues);
         if(indicator==-1)
-        {
             return false;
-        }
-        else
-            {
-                return true;
-            }
+        else return true;
     }
     public Cursor GetData(){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -49,10 +43,24 @@ public class DataBaseHelperForDate extends SQLiteOpenHelper
     }
     public boolean replace(String DATE,boolean Varified){
         SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues(  );
+        ContentValues contentValues = new ContentValues();
         contentValues.put( "DATE1",DATE);
+        long a=database.replace("DATESHEET",null,contentValues);
+        if(a==-1)
+            return false;
+        else
+            return true;
+    }
+    public Cursor Select(String date){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = (Cursor) database.rawQuery( "SELECT * FROM DATESHEET where DATE1="+date+"",null);
+        return  cursor;
+    }
+    public boolean Update(String Date,boolean Varified){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
         contentValues.put( "VARIFIED",Varified);
-        long a =database.replace("DATESHEET",null,contentValues);
+        long a= database.update( "DATESHEET",contentValues,"DATE1='"+Date+"'",null);
         if(a==-1){
             return false;
         }
@@ -60,6 +68,5 @@ public class DataBaseHelperForDate extends SQLiteOpenHelper
         {
             return true;
         }
-
     }
 }

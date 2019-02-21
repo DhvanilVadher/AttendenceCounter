@@ -33,6 +33,7 @@
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="632dp"/>
         <ImageView
+            android:id="@+id/image"
             android:background="@android:color/transparent"
             android:layout_width="150sp"
             android:layout_height="80sp"
