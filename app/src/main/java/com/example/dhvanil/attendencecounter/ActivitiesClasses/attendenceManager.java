@@ -39,6 +39,7 @@ public class attendenceManager extends AppCompatActivity {
         if(cursor.moveToFirst()) {
             ImageView imageView = findViewById( R.id.image );
             imageView.setImageResource( R.drawable.varified );
+
         }
         CustomAdapter adapter = new CustomAdapter(Lectures1,this);
         listView.setAdapter(adapter);
@@ -81,12 +82,13 @@ public class attendenceManager extends AppCompatActivity {
        int Total = 0;
        int Attended = 0;
        Cursor c= hpd.Select( Date);
-       if(hpd.insert(Date))
+       if(c.moveToFirst())
         {
            Log.v("yeah","Yeah");
         }
         else
         {
+            hpd.insert( Date );
             Log.v("NOOOO","Noooo");
         }
        for (List i :Lectures1){
@@ -153,12 +155,10 @@ public class attendenceManager extends AppCompatActivity {
                 return null;
             }
             @Override
-            public long getItemId( int position ) {
-                return 0;
-            }
+            public long getItemId(int position) {return 0;}
             @Override
-            public View getView( final int position, View convertView, ViewGroup parent ) {
-                convertView = getLayoutInflater().inflate(R.layout.dateattendencesample,null );
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                convertView = getLayoutInflater().inflate(R.layout.dateattendencesample,null);
                 TextView textView = convertView.findViewById( R.id.subname);
                 final RadioButton attended = convertView.findViewById( R.id.present);
                 final RadioButton abscent = convertView.findViewById( R.id.abscent);

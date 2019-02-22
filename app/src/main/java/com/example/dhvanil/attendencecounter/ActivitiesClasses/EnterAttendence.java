@@ -1,6 +1,7 @@
 package com.example.dhvanil.attendencecounter.ActivitiesClasses;
 
 
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.dhvanil.attendencecounter.DataBaseClass.DataBaseHelper;
 import com.example.dhvanil.attendencecounter.adaptersClasses.DataClass;
 import com.example.dhvanil.attendencecounter.Adapters.DateAdapter;
 import com.example.dhvanil.attendencecounter.R;
@@ -52,9 +54,19 @@ public class EnterAttendence extends AppCompatActivity {
         for(LocalDate date = Startdate;date.isBefore(Todaydate.plusDays(1));date= date.plusDays(1)){
             String a= date.format(formatter);
             String b= String.valueOf(date.getDayOfWeek());
-            DataClass dataClass = new DataClass(a,b);
-            dataClasses.add(dataClass);
-            hpd.Update(a,false);
+           // DataClass dataClass = new DataClass(a,b);
+           // dataClasses.add(dataClass);
+            Cursor c=hpd.Select(a);
+            if(c.moveToFirst())
+            {
+                DataClass dataClass = new DataClass(a,b,true);
+                dataClasses.add( dataClass );
+            }
+            else {
+                hpd.insert(a);
+                DataClass dataClass = new DataClass(a,b,false);
+                dataClasses.add( dataClass );
+            }
         }
         DateAdapter dateAdapter = new DateAdapter(this,dataClasses);
         recyclerView.setAdapter(dateAdapter);

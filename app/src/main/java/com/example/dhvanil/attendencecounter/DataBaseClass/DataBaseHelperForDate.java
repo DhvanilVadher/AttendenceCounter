@@ -56,10 +56,10 @@ public class DataBaseHelperForDate extends SQLiteOpenHelper
         Cursor cursor = (Cursor) database.rawQuery( "SELECT * FROM DATESHEET where DATE1="+date+"",null);
         return  cursor;
     }
-    public boolean Update(String Date,boolean Varified){
+    public boolean Update(String Date){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put( "VARIFIED",Varified);
+        contentValues.put( "DATE1",Date);
         long a= database.update( "DATESHEET",contentValues,"DATE1='"+Date+"'",null);
         if(a==-1){
             return false;

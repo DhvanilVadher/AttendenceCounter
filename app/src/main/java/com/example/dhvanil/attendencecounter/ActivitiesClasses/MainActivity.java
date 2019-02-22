@@ -1,4 +1,6 @@
 package com.example.dhvanil.attendencecounter.ActivitiesClasses;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,6 +24,7 @@ import com.example.dhvanil.attendencecounter.adaptersClasses.List;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import static com.example.dhvanil.attendencecounter.adaptersClasses.ApplicationClass.Startdate;
@@ -40,7 +43,20 @@ public class MainActivity extends AppCompatActivity
         setContentView( R.layout.activity_main);
         initialization();
         checkCondition();
+        setnotification();
     }
+
+    private void setnotification() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set( Calendar.MINUTE,30);
+        calendar.set( Calendar.SECOND,0);
+        Intent intent =new Intent( getApplicationContext(),Notificaiton_receiever.class );
+        PendingIntent pendingIntent = PendingIntent.getBroadcast( getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService( ALARM_SERVICE );
+        alarmManager.setRepeating( AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+    }
+
     private void checkCondition() {
         if(startingDate=="" || startingDate == null){
             AlertDialog.Builder builder;
